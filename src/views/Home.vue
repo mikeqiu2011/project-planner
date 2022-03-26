@@ -1,29 +1,32 @@
 <template>
-  <!-- <div class="home">Home</div> -->
-  <!-- <HomeNav /> -->
-  <div v-if="projects.length">
-    <div v-for="project in projects" :key="project.id">
-      <ProjectCard
-        :project="project"
-        @remove="handleRemove"
-        @complete="handleComplete"
-      />
+  <div class="home">
+    <FilterNav @filterChange="handleFilter" />
+    <div v-if="projects.length">
+      <div v-for="project in projects" :key="project.id">
+        <ProjectCard
+          :project="project"
+          @remove="handleRemove"
+          @complete="handleComplete"
+        />
+      </div>
     </div>
-  </div>
-  <div v-else>
-    <p>Loading projects info...</p>
+    <div v-else>
+      <p>Loading projects info...</p>
+    </div>
   </div>
 </template>
 
 <script>
 import ProjectCard from "../components/ProjectCard.vue";
+import FilterNav from "../components/FilterNav.vue";
 
 export default {
   name: "Home",
-  components: { ProjectCard },
+  components: { ProjectCard, FilterNav },
   data() {
     return {
       projects: [],
+      curFilter: "all",
     };
   },
   mounted() {
@@ -49,6 +52,20 @@ export default {
       });
       p.complete = !p.complete;
       console.log(this.projects);
+    },
+    handleFilter(status) {
+      console.log(status);
+      if (status == "completed") {
+        this.projects = this.projects.filter((project) => {
+          return project.complete;
+        });
+      } else if (status == "ongoing") {
+        this.projects = this.projects.filter((project) => {
+          return !project.complete;
+        });
+      } else {
+        this.projects = this.projects;
+      }
     },
   },
 };
