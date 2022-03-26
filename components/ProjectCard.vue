@@ -52,9 +52,6 @@ export default {
 </script>
 
 <style scoped>
-h3.complete {
-  color: green;
-}
 .project {
   margin: 20px auto;
   background: white;
@@ -63,19 +60,13 @@ h3.complete {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05);
   border-left: 4px solid #e90074;
 }
-.project.complete {
-  border-left: green 4px solid;
-}
 h3 {
-  cursor: pointer;
-}
-.icons {
   cursor: pointer;
 }
 .actions {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-items: space-between;
 }
 .material-icons {
   font-size: 24px;
@@ -86,7 +77,11 @@ h3 {
 .material-icons:hover {
   color: #777;
 }
+/* completed projects */
+.project.complete {
+  border-left: 4px solid #00ce89;
+}
 .project.complete .tick {
-  color: green;
+  color: #00ce89;
 }
 </style>
