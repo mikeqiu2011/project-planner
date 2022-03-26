@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <FilterNav @filterChange="curFilter = $event" />
+    <FilterNav @filterChange="curFilter = $event" :curFilter="curFilter" />
     <div v-if="projects.length">
       <div v-for="project in getFilterProjects" :key="project.id">
         <ProjectCard
