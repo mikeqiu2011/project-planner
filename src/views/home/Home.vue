@@ -19,7 +19,9 @@ export default {
   name: "Home",
   components: { HomeNav, ProjectCard },
   data() {
-    projects: [];
+    return {
+      projects: [],
+    };
   },
   mounted() {
     fetch("http://localhost:3000/projects")
