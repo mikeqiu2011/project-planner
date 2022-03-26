@@ -42,16 +42,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1.complete {
   color: green;
 }
 .project {
-  border-left: #e90074 solid 4px;
-  background: white;
   margin: 20px auto;
+  background: white;
   padding: 10px 20px;
   border-radius: 4px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #e90074;
 }
 h3 {
   cursor: pointer;
@@ -63,5 +64,14 @@ h3 {
   display: flex;
   align-items: center;
   justify-items: space-between;
+}
+.material-icons {
+  font-size: 24px;
+  margin-left: 10px;
+  color: #bbb;
+  cursor: pointer;
+}
+.material-icons:hover {
+  color: #777;
 }
 </style>
