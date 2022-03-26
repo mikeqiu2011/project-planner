@@ -30,7 +30,9 @@ export default {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(project),
-      }).catch((err) => console.log(err));
+      })
+        .then(() => this.$router.push({ name: "Home" }))
+        .catch((err) => console.log(err));
     },
   },
 };
