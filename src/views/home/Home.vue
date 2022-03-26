@@ -1,0 +1,34 @@
+<template>
+  <!-- <div class="home">Home</div> -->
+  <!-- <HomeNav /> -->
+  <div v-if="projects.length">
+    <div v-for="project in projects" :key="project.id">
+      <ProjectCard :project="project" />
+    </div>
+  </div>
+  <div v-else>
+    <p>Loading projects info...</p>
+  </div>
+</template>
+
+<script>
+import HomeNav from "./HomeNav.vue";
+import ProjectCard from "./ProjectCard.vue";
+
+export default {
+  name: "Home",
+  components: { HomeNav, ProjectCard },
+  data() {
+    projects: [];
+  },
+  mounted() {
+    fetch("http://localhost:3000/projects")
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.projects = data;
+        console.log(this.projects);
+      })
+      .catch((err) => console.log(err.message));
+  },
+};
+</script>
