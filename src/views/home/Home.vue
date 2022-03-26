@@ -3,7 +3,7 @@
   <!-- <HomeNav /> -->
   <div v-if="projects.length">
     <div v-for="project in projects" :key="project.id">
-      <ProjectCard :project="project" />
+      <ProjectCard :project="project" @remove="remove(project)" />
     </div>
   </div>
   <div v-else>
@@ -13,7 +13,7 @@
 
 <script>
 import HomeNav from "./HomeNav.vue";
-import ProjectCard from "./ProjectCard.vue";
+import ProjectCard from "../../../components/ProjectCard.vue";
 
 export default {
   name: "Home",
@@ -31,6 +31,14 @@ export default {
         console.log(this.projects);
       })
       .catch((err) => console.log(err.message));
+  },
+  methods: {
+    remove(project) {
+      console.log("remove event catched by parent");
+      this.projects.filter((item) => {
+        return item !== project;
+      });
+    },
   },
 };
 </script>
