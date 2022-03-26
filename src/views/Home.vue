@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <FilterNav @filterChange="handleFilter" />
+    <FilterNav @filterChange="curFilter = $event" />
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in getFilterProjects" :key="project.id">
         <ProjectCard
           :project="project"
           @remove="handleRemove"
@@ -28,6 +28,23 @@ export default {
       projects: [],
       curFilter: "all",
     };
+  },
+  computed: {
+    getFilterProjects() {
+      let filterProjects;
+      if (this.curFilter == "completed") {
+        filterProjects = this.projects.filter((project) => {
+          return project.complete;
+        });
+      } else if (this.curFilter == "ongoing") {
+        filterProjects = this.projects.filter((project) => {
+          return !project.complete;
+        });
+      } else {
+        filterProjects = this.projects;
+      }
+      return filterProjects;
+    },
   },
   mounted() {
     fetch("http://localhost:3000/projects")
@@ -55,17 +72,6 @@ export default {
     },
     handleFilter(status) {
       console.log(status);
-      if (status == "completed") {
-        this.projects = this.projects.filter((project) => {
-          return project.complete;
-        });
-      } else if (status == "ongoing") {
-        this.projects = this.projects.filter((project) => {
-          return !project.complete;
-        });
-      } else {
-        this.projects = this.projects;
-      }
     },
   },
 };
