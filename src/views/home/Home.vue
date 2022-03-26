@@ -3,7 +3,7 @@
   <!-- <HomeNav /> -->
   <div v-if="projects.length">
     <div v-for="project in projects" :key="project.id">
-      <ProjectCard :project="project" @remove="remove(project)" />
+      <ProjectCard :project="project" @remove="handleRemove" />
     </div>
   </div>
   <div v-else>
@@ -33,11 +33,12 @@ export default {
       .catch((err) => console.log(err.message));
   },
   methods: {
-    remove(project) {
+    handleRemove(id) {
       console.log("remove event catched by parent");
-      this.projects.filter((item) => {
-        return item !== project;
-      });
+      this.projects = this.projects.filter((project) => {
+        return project.id !== id;
+      }); // not an inline function, have to reassign
+      console.log(this.projects);
     },
   },
 };

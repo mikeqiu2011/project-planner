@@ -36,10 +36,10 @@ export default {
       this.project.complete = !this.project.complete;
     },
     removeProject() {
-      fetch(this.uri, {
-        method: "DELETE",
-      });
-      this.$router.push({ name: "Home" });
+      fetch(this.uri, { method: "DELETE" })
+        .then(() => this.$emit("remove", this.project.id))
+        .catch((err) => console.log(err.message));
+      // this.$router.push({ name: "Home" });
       // this.$emit("remove");
       // console.log("remove event emitted");
     },
