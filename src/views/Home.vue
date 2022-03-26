@@ -16,12 +16,11 @@
 </template>
 
 <script>
-import HomeNav from "../../components/Navbar.vue";
-import ProjectCard from "../../components/ProjectCard.vue";
+import ProjectCard from "../components/ProjectCard.vue";
 
 export default {
   name: "Home",
-  components: { HomeNav, ProjectCard },
+  components: { ProjectCard },
   data() {
     return {
       projects: [],
