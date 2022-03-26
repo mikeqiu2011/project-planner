@@ -21,14 +21,15 @@ export default {
   },
   methods: {
     addProject() {
+      let project = {
+        title: this.title,
+        detail: this.detail,
+        complete: false,
+      };
       fetch(this.uri, {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          title: this.title,
-          detail: this.detail,
-          complete: false,
-        }),
+        body: JSON.stringify(project),
       }).catch((err) => console.log(err));
     },
   },
