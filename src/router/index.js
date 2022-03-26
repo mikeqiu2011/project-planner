@@ -15,7 +15,7 @@ const routes = [
     component: AddProject
   },
   {
-    path: '/project/:id',
+    path: '/projects/:id',
     name: 'EditProject',
     component: EditProject,
     props: true

@@ -5,7 +5,7 @@
       <input type="text" v-model="title" required />
       <label>Details</label>
       <textarea v-model="detail" required />
-      <button>Submit</button>
+      <button>Update project</button>
     </form>
   </div>
   <div v-else>
@@ -45,7 +45,7 @@ export default {
           detail: this.detail,
         }),
       })
-        .then(this.$router.push("/"))
+        .then(() => this.$router.push("/"))
         .catch((err) => console.log(err));
     },
   },
