@@ -7,7 +7,7 @@
       <div class="icons">
         <span @click="toggleComplete" class="material-icons"> edit </span>
         <span @click="removeProject" class="material-icons"> delete </span>
-        <span @click="toggleComplete" class="material-icons"> done </span>
+        <span @click="toggleComplete" class="material-icons tick"> done </span>
       </div>
     </div>
     <div class="details">
@@ -33,11 +33,11 @@ export default {
       this.showDetail = !this.showDetail;
     },
     toggleComplete() {
-      this.project.complete = !this.project.complete;
+      // this.project.complete = !this.project.complete;
       fetch(this.uri, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ complete: this.project.complete }), //only send value this is changed
+        body: JSON.stringify({ complete: !this.project.complete }), //only send value this is changed
       })
         .then(this.$emit("complete", this.project.id))
         .catch((err) => console.log(err.message));
@@ -85,5 +85,8 @@ h3 {
 }
 .material-icons:hover {
   color: #777;
+}
+.project.complete .tick {
+  color: green;
 }
 </style>

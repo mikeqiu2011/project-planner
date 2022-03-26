@@ -4,7 +4,7 @@
       "id": 1,
       "title": "project 1",
       "detail": "detail 1",
-      "complete": false
+      "complete": true
     },
     {
       "id": 2,

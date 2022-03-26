@@ -45,8 +45,10 @@ export default {
       console.log(this.projects);
     },
     handleComplete(id) {
-      project = this.projects.find((project) => project.id == id);
-      project.complete = !project.complete;
+      let p = this.projects.find((project) => {
+        return project.id === id;
+      });
+      p.complete = !p.complete;
       console.log(this.projects);
     },
   },
