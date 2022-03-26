@@ -1,12 +1,12 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ complete: project.complete }">
     <div class="actions">
-      <h3 @click="toggleShowDetail" :class="{ complete: project.complete }">
+      <h3 @click="toggleShowDetail">
         {{ project.title }}
       </h3>
       <div class="icons">
         <span @click="toggleComplete" class="material-icons"> edit </span>
-        <span @click="toggleComplete" class="material-icons"> delete </span>
+        <span @click="removeProject" class="material-icons"> delete </span>
         <span @click="toggleComplete" class="material-icons"> done </span>
       </div>
     </div>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       showDetail: false,
+      uri: "http://localhost:3000/projects/" + this.project.id,
     };
   },
   methods: {
@@ -34,16 +35,20 @@ export default {
     toggleComplete() {
       this.project.complete = !this.project.complete;
     },
-    remove() {
-      this.$emit("remove");
-      console.log("remove event emitted");
+    removeProject() {
+      fetch(this.uri, {
+        method: "DELETE",
+      });
+      this.$router.push({ name: "Home" });
+      // this.$emit("remove");
+      // console.log("remove event emitted");
     },
   },
 };
 </script>
 
 <style scoped>
-h1.complete {
+h3.complete {
   color: green;
 }
 .project {
@@ -53,6 +58,9 @@ h1.complete {
   border-radius: 4px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05);
   border-left: 4px solid #e90074;
+}
+.project.complete {
+  border-left: green 4px solid;
 }
 h3 {
   cursor: pointer;
