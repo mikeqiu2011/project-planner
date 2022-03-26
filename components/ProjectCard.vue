@@ -34,14 +34,18 @@ export default {
     },
     toggleComplete() {
       this.project.complete = !this.project.complete;
+      fetch(this.uri, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ complete: this.project.complete }), //only send value this is changed
+      })
+        .then(this.$emit("complete", this.project.id))
+        .catch((err) => console.log(err.message));
     },
     removeProject() {
-      fetch(this.uri, { method: "DELETE" })
-        .then(() => this.$emit("remove", this.project.id))
+      fetch(this.uri, { method: "DELETE" }) // first delete in db
+        .then(() => this.$emit("remove", this.project.id)) // if success, delete it locally
         .catch((err) => console.log(err.message));
-      // this.$router.push({ name: "Home" });
-      // this.$emit("remove");
-      // console.log("remove event emitted");
     },
   },
 };

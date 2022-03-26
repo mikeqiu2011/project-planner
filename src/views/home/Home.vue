@@ -3,7 +3,11 @@
   <!-- <HomeNav /> -->
   <div v-if="projects.length">
     <div v-for="project in projects" :key="project.id">
-      <ProjectCard :project="project" @remove="handleRemove" />
+      <ProjectCard
+        :project="project"
+        @remove="handleRemove"
+        @complete="handleComplete"
+      />
     </div>
   </div>
   <div v-else>
@@ -38,6 +42,11 @@ export default {
       this.projects = this.projects.filter((project) => {
         return project.id !== id;
       }); // not an inline function, have to reassign
+      console.log(this.projects);
+    },
+    handleComplete(id) {
+      project = this.projects.find((project) => project.id == id);
+      project.complete = !project.complete;
       console.log(this.projects);
     },
   },
