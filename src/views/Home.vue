@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import HomeNav from "./HomeNav.vue";
-import ProjectCard from "../../../components/ProjectCard.vue";
+import HomeNav from "../../components/Navbar.vue";
+import ProjectCard from "../../components/ProjectCard.vue";
 
 export default {
   name: "Home",

@@ -1,10 +1,18 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link :to="{ name: 'Home' }">Projects</router-link>
     <router-link :to="{ name: 'AddProject' }">Add a New Project</router-link>
-  </nav>
+  </nav> -->
+  <Navbar />
   <router-view />
 </template>
+
+<script>
+import Navbar from "./components/Navbar.vue";
+export default {
+  components: { Navbar },
+};
+</script>
 
 <style>
 body {
@@ -17,19 +25,5 @@ body {
   max-width: 600px;
   margin: 0 auto;
   color: #555;
-}
-nav {
-  padding: 30px;
-}
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 4px;
-}
-nav a.router-link-exact-active {
-  color: white;
-  background: crimson;
 }
 </style>
