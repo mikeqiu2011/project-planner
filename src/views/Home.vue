@@ -2,7 +2,7 @@
   <div class="home">
     <FilterNav @filterChange="curFilter = $event" :curFilter="curFilter" />
     <div v-if="projects.length">
-      <div v-for="project in getFilterProjects" :key="project.id">
+      <div v-for="project in filteredProjects" :key="project.id">
         <ProjectCard
           :project="project"
           @remove="handleRemove"
@@ -30,20 +30,14 @@ export default {
     };
   },
   computed: {
-    getFilterProjects() {
-      let filterProjects;
+    filteredProjects() {
       if (this.curFilter == "completed") {
-        filterProjects = this.projects.filter((project) => {
-          return project.complete;
-        });
-      } else if (this.curFilter == "ongoing") {
-        filterProjects = this.projects.filter((project) => {
-          return !project.complete;
-        });
-      } else {
-        filterProjects = this.projects;
+        return this.projects.filter((project) => project.complete); //maping function
       }
-      return filterProjects;
+      if (this.curFilter == "ongoing") {
+        return this.projects.filter((project) => !project.complete);
+      }
+      return this.projects;
     },
   },
   mounted() {
